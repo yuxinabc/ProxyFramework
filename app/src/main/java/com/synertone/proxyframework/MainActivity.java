@@ -41,8 +41,14 @@ private TextView tv_content;
         });*/
         httpRequestProxy.post(url, params, new ModelCallback<WeatherInfo>() {
             @Override
-            public void onSuccess(WeatherInfo weatherInfo) {
-                tv_content.setText(weatherInfo.toString());
+            public void onSuccess(final WeatherInfo weatherInfo) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tv_content.setText(weatherInfo.toString());
+                    }
+                });
+
             }
         });
     }
